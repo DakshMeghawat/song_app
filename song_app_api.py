@@ -1,7 +1,12 @@
+import os
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from song_app_backend.business_logic.dowload_song import download_youtube_video
 
 app = Flask(__name__)
+CORS(app)
+
+AUDIO_FOLDER = '/home/daksh/song_app/audio/'
 
 @app.route('/download', methods=['POST'])
 def download_song():
@@ -17,6 +22,14 @@ def download_song():
         return jsonify({"error": message}), 404
 
     return jsonify({"message": message, "audio_path": audio_path}), 200
+
+@app.route('/songs', methods=['GET'])
+def list_songs():
+    try:
+        songs = [f for f in os.listdir(AUDIO_FOLDER) if f.endswith('.mp3')]
+        return jsonify(songs), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
