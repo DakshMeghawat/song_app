@@ -18,7 +18,7 @@ def download_youtube_video(song_name):
 
     # Step 2: Set file paths
     audio_folder = '/home/daksh/song_app/audio/'
-    audio_path = os.path.join(audio_folder, f"{song_name}")  # Change to mp3 directly
+    audio_path = os.path.join(audio_folder, f"{results[0]['title']}")  # Change to mp3 directly
 
     # Step 3: Ensure directory exists
     os.makedirs(audio_folder, exist_ok=True)
