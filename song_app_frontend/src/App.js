@@ -7,6 +7,20 @@ function App() {
   const [audioPath, setAudioPath] = useState('');
   const [songs, setSongs] = useState([]);
 
+  useEffect(() => {
+    const fetchSongs = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/songs');
+        const data = await response.json();
+        setSongs(data);
+      } catch (error) {
+        setMessage('Error fetching songs.');
+      }
+    };
+
+    fetchSongs();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
@@ -26,7 +40,6 @@ function App() {
       if (response.ok) {
         setMessage(data.message);
         setAudioPath(data.audio_path);
-        fetchSongs(); // Refresh the song list after download
       } else {
         setMessage(data.error);
       }
@@ -35,22 +48,9 @@ function App() {
     }
   };
 
-  const fetchSongs = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/songs');
-      const data = await response.json();
-      setSongs(data);
-    } catch (error) {
-      setMessage('Error fetching song list.');
-    }
-  };
-
-  useEffect(() => {
-    fetchSongs(); // Fetch the list of songs on component mount
-  }, []);
-
   const playSong = (song) => {
-    setAudioPath(`http://127.0.0.1:5000/audio/${song}`); // Adjust the URL to your needs
+    const audio = new Audio(`http://127.0.0.1:5000/audio/${song}`);
+    audio.play();
   };
 
   return (
@@ -73,23 +73,15 @@ function App() {
           <a href={audioPath} target="_blank" rel="noopener noreferrer">Download Audio</a>
         </div>
       )}
-
       <h2>Available Songs:</h2>
       <ul>
         {songs.map((song, index) => (
           <li key={index}>
-            <span onClick={() => playSong(song)} style={{ cursor: 'pointer', color: 'blue' }}>
-              {song}
-            </span>
+            {song} 
+            <button onClick={() => playSong(song)}>Play</button>
           </li>
         ))}
       </ul>
-      {audioPath && (
-        <audio controls>
-          <source src={audioPath} type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
-      )}
     </div>
   );
 }

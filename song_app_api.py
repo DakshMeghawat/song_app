@@ -1,5 +1,6 @@
 import os
 from flask import Flask, request, jsonify
+from flask import send_from_directory
 from flask_cors import CORS
 from song_app_backend.business_logic.dowload_song import download_youtube_video
 
@@ -30,6 +31,11 @@ def list_songs():
         return jsonify(songs), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@app.route('/audio/<filename>', methods=['GET'])
+def serve_audio(filename):
+    return send_from_directory(AUDIO_FOLDER, filename)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
