@@ -1,38 +1,120 @@
+* {
+  box-sizing: border-box; /* Ensure padding does not affect width */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif; /* Use a clean font */
+  background-color: #f0f0f0; /* Light background color */
+  color: #333; /* Dark text color for contrast */
+}
+
 .App {
   text-align: center;
+  max-width: 600px; /* Limit width for better readability */
+  margin: 20px auto; /* Center the app */
+  padding: 20px; /* Add padding for spacing */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: #fff; /* White background for the app */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  font-size: 2.5rem; /* Increase heading size */
+  margin-bottom: 20px; /* Add space below heading */
+  color: #282c34; /* Darker color for the heading */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h2 {
+  font-size: 1.5rem; /* Size for secondary headings */
+  margin: 15px 0; /* Spacing around secondary headings */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+form {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: center; /* Center the form items */
+  margin-bottom: 20px; /* Spacing below form */
 }
 
-.App-link {
-  color: #61dafb;
+input[type="text"] {
+  padding: 10px; /* Padding for text input */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  margin-right: 10px; /* Space between input and button */
+  width: 70%; /* Full width minus button space */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  padding: 10px 15px; /* Padding for buttons */
+  background-color: #61dafb; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor for buttons */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+  background-color: #21a1f1; /* Darker shade on hover */
+}
+
+.player {
+  margin: 20px 0; /* Spacing around the player */
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 8px;
+  margin: 10px 0;
+  background-color: #ddd;
+  border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+}
+
+li {
+  background-color: #f9f9f9; /* Light background for song items */
+  margin: 10px 0; /* Spacing between song items */
+  padding: 10px; /* Padding for song items */
+  border-radius: 5px; /* Rounded corners for song items */
+  display: flex;
+  justify-content: space-between; /* Space between song title and buttons */
+  align-items: center; /* Center items vertically */
+}
+
+li button {
+  margin-left: 10px; /* Space between buttons in list items */
+}
+.song-item {
+  display: flex;
+  justify-content: space-between; /* Space between title and buttons */
+  align-items: center; /* Vertically center the items */
+  padding: 5px 0; /* Add some padding for better spacing */
+}
+
+.song-item button {
+  margin-left: 10px; /* Add some space between the buttons */
 }
